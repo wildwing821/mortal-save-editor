@@ -9,22 +9,26 @@ from pydantic import BaseModel, Field
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s")
 logger = logging.getLogger("MortalDatEditor")
 
+
 class TargetAttributes(BaseModel):
     """定義需要被優化的活俠傳關鍵屬性資料模型"""
     # --- 基礎貨幣與消耗性數值 ---
-    money: Optional[int] = Field(None, alias="money", description="銀兩")
-    mental: Optional[int] = Field(None, alias="mental", description="心相") 
-    martial_point: Optional[int] = Field(None, alias="martial-point", description="武學點")
-    contribution: Optional[int] = Field(None, alias="contribution", description="門派貢獻")
-    fate: Optional[int] = Field(None, alias="fate", description="天命點")                             
-    weapon_point: Optional[int] = Field(None, alias="weapon", description="打鐵點數")                  
-    poison_point: Optional[int] = Field(None, alias="poison", description="煉毒點數")                  
+    money: Optional[int] = Field(None, alias="money", description="銀兩")                                       #最大99999
+    mental: Optional[int] = Field(None, alias="mental", description="心相")                                     #最大100 
+    martial_point: Optional[int] = Field(None, alias="martial-point", description="武學點")                     #最大500
+    contribution: Optional[int] = Field(None, alias="contribution", description="門派貢獻")                     #最大200
+    fate: Optional[int] = Field(None, alias="fate", description="天命點")                                       #最大500                             
+    weapon_point: Optional[int] = Field(None, alias="weapon", description="打鐵點數")                           #最大500                  
+    poison_point: Optional[int] = Field(None, alias="poison", description="煉毒點數")                           #最大500 
+    total_weapon_point: Optional[int] = Field(None, alias="total-weapon-point", description="打鐵最大消費")     #花費350可達25
+    total_martial_point: Optional[int] = Field(None, alias="total-martial-point", description="武學最大消費")   #花費350可達25
+    total_poison_point: Optional[int] = Field(None, alias="total-poison-point", description="煉毒最大消費")     #花費350可達25                  
 
     # --- 第一張圖：門派經營 ---
     assets: Optional[int] = Field(None, alias="assets", description="門派資產")                        
     fame: Optional[int] = Field(None, alias="fame", description="門派名聲")                            
     people: Optional[int] = Field(None, alias="people", description="門派人口")                        
-    faction: Optional[int] = Field(None, alias="faction")                      
+    faction: Optional[int] = Field(None, alias="faction", description="門派規模")                      
     team: Optional[int] = Field(None, alias="team", description="門派向心力")                             
     
     # --- 第二張圖：趙活核心屬性 ---
@@ -57,6 +61,20 @@ class TargetAttributes(BaseModel):
     confucianism: Optional[int] = Field(None, alias="confucianism", description="儒學")            
     taoism: Optional[int] = Field(None, alias="taoism", description="道學")                        
     buddhism: Optional[int] = Field(None, alias="buddhism", description="佛學")                    
+    # --- 人物好感度 ---
+    master: Optional[int] = Field(None, alias="master", description="唐掌門")
+    #brother1A: Optional[int] = Field(None, alias="brother1A", description="大師兄")
+    #brother2: Optional[int] = Field(None, alias="brother2", description="二師兄")
+    #brother3: Optional[int] = Field(None, alias="brother3", description="三師兄")
+    #brother4: Optional[int] = Field(None, alias="brother4", description="四師兄")    
+    girl1: Optional[int] = Field(None, alias="girl1", description="")
+    girl2: Optional[int] = Field(None, alias="girl2", description="葉雲裳")
+    girl4: Optional[int] = Field(None, alias="girl4", description="")
+    girl5: Optional[int] = Field(None, alias="girl5", description="")
+    girl6: Optional[int] = Field(None, alias="girl6", description="")
+    girl7: Optional[int] = Field(None, alias="girl7", description="")
+    girl8: Optional[int] = Field(None, alias="girl8", description="")
+    girl9: Optional[int] = Field(None, alias="girl9", description="")                  
 
 
     # 解決 Pydantic V2 警告
