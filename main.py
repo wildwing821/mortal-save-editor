@@ -20,18 +20,18 @@ class TargetAttributes(BaseModel):
     fate: Optional[int] = Field(None, alias="fate", description="天命點")                                       #最大500                             
     weapon_point: Optional[int] = Field(None, alias="weapon", description="打鐵點數")                           #最大500                  
     poison_point: Optional[int] = Field(None, alias="poison", description="煉毒點數")                           #最大500 
-    total_weapon_point: Optional[int] = Field(None, alias="total-weapon-point", description="打鐵最大消費")     #花費350可達25
-    total_martial_point: Optional[int] = Field(None, alias="total-martial-point", description="武學最大消費")   #花費350可達25
-    total_poison_point: Optional[int] = Field(None, alias="total-poison-point", description="煉毒最大消費")     #花費350可達25                  
+    total_weapon_point: Optional[int] = Field(None, alias="total-weapon-point", description="打鐵最大消費")     #略估花費500可達25
+    total_martial_point: Optional[int] = Field(None, alias="total-martial-point", description="武學最大消費")   #略估花費350可達25
+    total_poison_point: Optional[int] = Field(None, alias="total-poison-point", description="煉毒最大消費")     #略估花費500可達25                  
 
-    # --- 第一張圖：門派經營 ---
+    # --- 門派經營 ---
     assets: Optional[int] = Field(None, alias="assets", description="門派資產")                        
     fame: Optional[int] = Field(None, alias="fame", description="門派名聲")                            
     people: Optional[int] = Field(None, alias="people", description="門派人口")                        
     faction: Optional[int] = Field(None, alias="faction", description="門派規模")                      
     team: Optional[int] = Field(None, alias="team", description="門派向心力")                             
     
-    # --- 第二張圖：趙活核心屬性 ---
+    # --- 趙活核心屬性 ---
     life: Optional[int] = Field(None, alias="life", description="體力")                            
     dexterity: Optional[int] = Field(None, alias="dexterity", description="輕功") 
     stamina: Optional[int] = Field(None, alias="stamina", description="內力")                                      
@@ -63,19 +63,19 @@ class TargetAttributes(BaseModel):
     buddhism: Optional[int] = Field(None, alias="buddhism", description="佛學")                    
     # --- 人物好感度 ---
     master: Optional[int] = Field(None, alias="master", description="唐掌門")
-    #brother1A: Optional[int] = Field(None, alias="brother1A", description="大師兄")
-    #brother2: Optional[int] = Field(None, alias="brother2", description="二師兄")
-    #brother3: Optional[int] = Field(None, alias="brother3", description="三師兄")
-    #brother4: Optional[int] = Field(None, alias="brother4", description="四師兄")    
-    girl1: Optional[int] = Field(None, alias="girl1", description="")
+    sister1: Optional[int] = Field(None, alias="sister1", description="小師妹")
+    brother1: Optional[int] = Field(None, alias="brother1", description="大師兄")
+    brother2: Optional[int] = Field(None, alias="brother2", description="二師兄")
+    brother3: Optional[int] = Field(None, alias="brother3", description="三師兄")
+    brother4: Optional[int] = Field(None, alias="brother4", description="四師兄")    
+    girl1: Optional[int] = Field(None, alias="girl1", description="瑞杏")                   #未確認
     girl2: Optional[int] = Field(None, alias="girl2", description="葉雲裳")
-    girl4: Optional[int] = Field(None, alias="girl4", description="")
-    girl5: Optional[int] = Field(None, alias="girl5", description="")
-    girl6: Optional[int] = Field(None, alias="girl6", description="")
-    girl7: Optional[int] = Field(None, alias="girl7", description="")
-    girl8: Optional[int] = Field(None, alias="girl8", description="")
-    girl9: Optional[int] = Field(None, alias="girl9", description="")                  
-
+    girl4: Optional[int] = Field(None, alias="girl4", description="龍湘")
+    girl5: Optional[int] = Field(None, alias="girl5", description="虞小梅")
+    girl6: Optional[int] = Field(None, alias="girl6", description="夏侯蘭")
+    girl7: Optional[int] = Field(None, alias="girl7", description="郁竹")
+    girl8: Optional[int] = Field(None, alias="girl8", description="魏菊")
+    girl9: Optional[int] = Field(None, alias="girl9", description="上官螢")
 
     # 解決 Pydantic V2 警告
     model_config = {"populate_by_name": True}
