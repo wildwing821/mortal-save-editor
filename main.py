@@ -4,6 +4,8 @@ import logging
 from pathlib import Path
 from typing import Optional
 from pydantic import BaseModel, Field
+import shutil
+from datetime import datetime
 
 # 配置標準日誌系統
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s")
@@ -85,7 +87,30 @@ class DatSaveCipher:
     """Infra 層：純二進位檔案 I/O，絕對禁止將數據強制轉為字串"""
     def __init__(self, file_path: Path):
         self.file_path = file_path
+    def create_backup(self) -> None:
+        """
+        Infra 層：執行檔案級別的備份作業。
+        使用時間戳記確保備份檔名唯一，並透過 shutil.copy2 完整保留檔案元資料。
+        """
+        # Guard Clause: 確認來源檔案存在才能備份
+        if not self.file_path.exists():
+            logger.warning("來源存檔不存在，無法執行備份程序。")
+            return
 
+        # 產生精確到秒的時間戳記
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        # 嚴格使用 pathlib 組合新檔名，避免路徑字串直接拼接的陷阱
+        backup_file_name = f"{self.file_path.stem}_backup_{timestamp}{self.file_path.suffix}"
+        backup_path = self.file_path.with_name(backup_file_name)
+
+        try:
+            shutil.copy2(self.file_path, backup_path)
+            logger.info(f"防禦機制啟動：已自動建立存檔備份 -> {backup_path.name}")
+        except OSError as err:
+            logger.error(f"備份存檔時發生系統 I/O 異常：{err}")
+            raise err
+            
     def load_raw_bytes(self) -> bytes:
         if not self.file_path.exists():
             raise FileNotFoundError(f"找不到存檔檔案：{self.file_path}")
@@ -93,6 +118,8 @@ class DatSaveCipher:
         return self.file_path.read_bytes()
 
     def save_raw_bytes(self, data: bytes) -> None:
+        self.create_backup()
+        
         temp_file = self.file_path.with_suffix(".dat.tmp")
         try:
             temp_file.write_bytes(data)
