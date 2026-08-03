@@ -76,7 +76,7 @@ python mortal_editor.py
 
 ```
 
-> **注意**：若 Steam ID 與預設不符，可於 `get_target_save_path()` 函式中進行配置修正。
+> **注意**：使用前將 Steam ID 於 `get_target_save_path()` 函式中修正為自己的ID。
 
 ---
 
