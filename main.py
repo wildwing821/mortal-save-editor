@@ -79,6 +79,9 @@ class TargetAttributes(BaseModel):
     girl8: Optional[int] = Field(None, alias="girl8", description="魏菊")
     girl9: Optional[int] = Field(None, alias="girl9", description="上官螢")
 
+    special3: Optional[int] = Field(None, alias="special3", description="葉雲舟")
+    special4: Optional[int] = Field(None, alias="special4", description="樊嘯天")
+
     # 解決 Pydantic V2 警告
     model_config = {"populate_by_name": True}
 
